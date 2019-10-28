@@ -16,7 +16,7 @@ TAGS_URL = reverse('recipe:tag-list')
 class PublicTagsApiTests(TestCase):
     """Test the publicly available tags API"""
 
-    def setUP(self):
+    def setUp(self):
         self.client = APIClient()
 
     def test_login_required(self):
@@ -73,7 +73,7 @@ class PrivateTagsApiTests(TestCase):
 
         exists = Tag.objects.filter(
             user=self.user,
-            name=payload['name']        
+            name=payload['name']
         ).exists()
         self.assertTrue(exists)
         self.assertEquals(res.status_code, status.HTTP_201_CREATED)
